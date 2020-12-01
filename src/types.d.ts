@@ -1,14 +1,15 @@
-export type RootState = { 
+export type RootState = {
     currentStroke : Stroke;
     strokes : Stroke[];
+    historyIndex : number;
 }
 
 export type Stroke = {
-    points : Points[];
-    color: string;
+    points : Point[];
+    color : string;
 }
 
-export type Point = { 
+export type Point = {
     x : number;
     y : number;
 }
