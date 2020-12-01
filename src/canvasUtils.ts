@@ -1,3 +1,4 @@
+import { resolve } from 'dns';
 import { Point } from './types';
 
 export const drawStroke = (
@@ -26,4 +27,13 @@ export const clearCanvas = (canvas: HTMLCanvasElement) => {
     }
     context.fillStyle = 'white';
     context.fillRect(0, 0, canvas.width, canvas.height)
+}
+
+export const getCanvasImage = ( canvas : HTMLCanvasElement | null) : Promise<null | Blob> => {
+    return new Promise<null | Blob>( (resolve, reject) => {
+        if(!canvas){
+            return reject(null)
+        }
+        canvas.toBlob(resolve);
+    })
 }

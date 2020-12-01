@@ -46,26 +46,7 @@ export const rootReducer = (
                 currentStroke: {...state.currentStroke, ...{color: action.payload}}
             }
         }
-        case UNDO: {
-            let historyIndex = state.historyIndex + 1;
-            if(historyIndex > state.strokes.length){
-                historyIndex = state.strokes.length ;
-            }
-            return {
-                ...state,
-                historyIndex
-            }
-        }
-        case REDO: {
-            let historyIndex = state.historyIndex - 1;
-            if(historyIndex < 0){
-                historyIndex = 0
-            }
-            return {
-                ...state,
-                historyIndex
-            }
-        }
+
         default:
             return state
     }

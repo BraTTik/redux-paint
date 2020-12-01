@@ -1,14 +1,19 @@
-import React, {useRef, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { currentStrokeSelector, historyIndexSelector, strokesSelector } from './selectors';
 import './App.css';
-import { beginStroke, endStroke, updateStroke } from './actions';
 import { drawStroke, clearCanvas } from './canvasUtils';
-import {ColorPanel} from './ColorPanel';
-import { EditPanel } from './EditPanel';
+import {ColorPanel} from './shared/ColorPanel';
+import { EditPanel } from './shared/EditPanel';
+import { currentStrokeSelector } from './modules/currentStroke/selectors';
+import { strokesSelector } from './modules/strokes/selectors';
+import { historyIndexSelector } from './modules/historyIndex/selectors';
+import { beginStroke, endStroke, updateStroke} from './modules/currentStroke/actions';
+import { useCanvas } from './CanvasContext';
+import { FilePanel } from './shared/FilePanel'
+
 
 function App() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasRef = useCanvas();
   const currentStroke = useSelector(currentStrokeSelector);
   const strokes = useSelector(strokesSelector);
   const historyIndex = useSelector(historyIndexSelector);
@@ -45,9 +50,10 @@ function App() {
 
   const endDrawing = () => {
     if(isDrawing){
-      dispatch(endStroke());
+      dispatch(endStroke(currentStroke, historyIndex));
     }
   }
+
   const draw = (
     { nativeEvent } : React.MouseEvent<HTMLCanvasElement>
   ) => {
@@ -62,6 +68,7 @@ function App() {
     <>
       <EditPanel />
       <ColorPanel />
+      <FilePanel />
       <canvas
         ref={canvasRef}
         width="600"
