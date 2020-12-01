@@ -24,18 +24,13 @@ export type StrokeAction =
     payload: string;
 }
 
-export const beginStroke = (x : number, y : number) => {
-    return {type: BEGIN_STROKE, payload: {x, y}}
-}
+export const beginStroke = createAction<Point>('BEGIN_STROKE');
 
-export const updateStroke = (x : number, y : number) => {
-    return { type: UPDATE_STROKE, payload: {x, y}}
-}
+export const updateStroke = createAction<Point>('UPDATE_STROKE');
 
-export const endStroke = (stroke : Stroke, historyLimit : number) => {
-    return { type: END_STROKE, payload: {stroke, historyLimit}}
-}
+export const endStroke = createAction<{
+    stroke: Stroke
+    historyIndex: number
+}>('END_STROKE');
 
-export const setStrokeColor = (color : string) => {
-    return { type: SET_STROKE_COLOR, payload: color}
-}
+export const setStrokeColor = createAction<string>('SET_STROKE_COLOR');

@@ -18,10 +18,11 @@ export type HistoryIndexAction =
     payload: {stroke: Stroke, historyLimit: number}
 }
 
-export const undo = (undoLimit: number) => {
-    return {type: UNDO, payload: undoLimit}
-}
+export const undo = createAction<number>('UNDO');
 
-export const redo = () => {
-    return {type: REDO}
-}
+export const redo = createAction('REDO');
+
+export const endStroke = createAction<{
+    stroke: Stroke
+    historyLimit: number
+}>('END_STROKE');
