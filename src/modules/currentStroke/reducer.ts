@@ -1,29 +1,32 @@
-import { RootState } from '../../types';
-import { 
-    StrokeAction,
-    beginStroke,
-    updateStroke,
-    endStroke,
-    setStrokeColor
-} from './actions';
-import { createReducer } from '@reduxjs/toolkit';
+import { RootState, Point } from '../../types';
+import { endStroke } from '../sharedActions';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const initialState : RootState['currentStroke'] = {
     points: [],
     color: '#000'
 }
 
-export const reducer = createReducer(initialState, (builder) => {
-    builder.addCase(beginStroke, (state, action) =>{
-        state.points = [action.payload]
-    })
-    builder.addCase(updateStroke, (state, action) => {
-        state.points.push(action.payload)
-    })
-    builder.addCase(endStroke, (state, action)=>{
-        state.points = []
-    })
-    builder.addCase(setStrokeColor, (state, action) => {
-        state.color = action.payload
-    })
+const slice = createSlice({
+    name: 'currentStroke',
+    initialState: initialState,
+    reducers: {
+        beginStroke: (state, action : PayloadAction<Point>) => {
+            state.points = [action.payload]
+        },
+        updateStroke: (state, action: PayloadAction<Point>) => {
+            state.points.push(action.payload)
+        },
+        setStrokeColor: (state, action: PayloadAction<string>) => {
+            state.color = action.payload;
+        }
+    },
+    extraReducers: (builder) => {
+        builder.addCase(endStroke, (state) => {
+            state.points = [];
+        })
+    }
 })
+
+export default slice.reducer;
+export const { beginStroke, updateStroke, setStrokeColor } = slice.actions;

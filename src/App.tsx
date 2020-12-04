@@ -7,7 +7,8 @@ import { EditPanel } from './shared/EditPanel';
 import { currentStrokeSelector } from './modules/currentStroke/selectors';
 import { strokesSelector } from './modules/strokes/selectors';
 import { historyIndexSelector } from './modules/historyIndex/selectors';
-import { beginStroke, endStroke, updateStroke} from './modules/currentStroke/actions';
+import { beginStroke, updateStroke} from './modules/currentStroke/reducer';
+import { endStroke } from './modules/sharedActions';
 import { useCanvas } from './CanvasContext';
 import { FilePanel } from './shared/FilePanel'
 

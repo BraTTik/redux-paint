@@ -4,9 +4,9 @@ import {
     combineReducers
 } from '@reduxjs/toolkit';
 import { logger } from 'redux-logger'
-import { reducer as currentStroke} from './modules/currentStroke/reducer';
-import { reducer as historyIndex} from './modules/historyIndex/reducer';
-import { reducer as strokes} from './modules/strokes/reducer';
+import currentStroke from './modules/currentStroke/reducer';
+import  historyIndex from './modules/historyIndex/reducer';
+import strokes from './modules/strokes/reducer';
 
 const middleware = [...getDefaultMiddleware(), logger];
 

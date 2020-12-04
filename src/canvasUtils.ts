@@ -1,4 +1,3 @@
-import { resolve } from 'dns';
 import { Point } from './types';
 
 export const drawStroke = (
