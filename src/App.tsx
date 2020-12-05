@@ -10,7 +10,8 @@ import { historyIndexSelector } from './modules/historyIndex/selectors';
 import { beginStroke, updateStroke} from './modules/currentStroke/reducer';
 import { endStroke } from './modules/sharedActions';
 import { useCanvas } from './CanvasContext';
-import { FilePanel } from './shared/FilePanel'
+import { FilePanel } from './shared/FilePanel';
+import { ModalLayer } from './ModalLayer';
 
 
 function App() {
@@ -67,6 +68,7 @@ function App() {
 
   return (
     <>
+      <ModalLayer />
       <EditPanel />
       <ColorPanel />
       <FilePanel />

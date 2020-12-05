@@ -45,7 +45,8 @@ app.get("/projects", (req, res) => {
   const projects = data.map((project) => ({
     name: project.name,
     image: project.image,
-    id: project.id
+    id: project.id,
+    strokes: project.strokes
   }))
   return res.json(projects)
 })
